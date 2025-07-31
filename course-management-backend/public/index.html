@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Management Platform</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1 id="greeting">Loading...</h1>
+  <select id="lang-select">
+    <option value="en">English</option>
+    <option value="ar">Arabic</option>
+    <option value="so">Somali</option>
+  </select>
+
+  <script>
+    const greetingEl = document.getElementById("greeting");
+    const langSelect = document.getElementById("lang-select");
+
+    async function fetchGreeting(lang = 'en') {
+      const response = await fetch(`/api/greet?lang=${lang}`);
+      const text = await response.text();
+      greetingEl.innerText = text;
+    }
+
+    langSelect.addEventListener("change", (e) => {
+      fetchGreeting(e.target.value);
+    });
+
+    fetchGreeting(); // default
+  </script>
+</body>
+</html>

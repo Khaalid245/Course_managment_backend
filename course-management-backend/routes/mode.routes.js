@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const modeController = require("../controllers/mode.controller");
+const { authenticate, authorizeRoles } = require("../middleware/authMiddleware");
 
-router.get("/", modeController.getAllModes);     // ✅ this is a function
-router.post("/", modeController.createMode);     // ✅ add this for seeding
+router.use(authenticate);
+
+router.get("/", modeController.getAllModes); // All authenticated users
+router.post("/", authorizeRoles('manager'), modeController.createMode); // Manager only
 
 module.exports = router;

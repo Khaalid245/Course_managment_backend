@@ -10,6 +10,12 @@ module.exports = (sequelize) => {
     allocationId: {
       type: DataTypes.UUID,
       allowNull: false,
+      references: {
+        model: 'Allocations', // ✅ Must match the actual table name in DB
+        key: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
     },
     attendance: {
       type: DataTypes.JSON,

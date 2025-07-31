@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const facilitatorController = require("../controllers/facilitator.controller");
+const { authenticate, authorizeRoles } = require("../middleware/authMiddleware");
 
-router.post("/", facilitatorController.createFacilitator);
-router.get("/", facilitatorController.getAllFacilitators);
-router.get("/:id", facilitatorController.getFacilitatorById);
-router.put("/:id", facilitatorController.updateFacilitator);
-router.delete("/:id", facilitatorController.deleteFacilitator);
+router.use(authenticate);
+
+router.post("/", authorizeRoles('manager'), facilitatorController.createFacilitator);
+router.get("/", authorizeRoles('manager'), facilitatorController.getAllFacilitators);
+router.get("/:id", authorizeRoles('manager'), facilitatorController.getFacilitatorById);
+router.put("/:id", authorizeRoles('manager'), facilitatorController.updateFacilitator);
+router.delete("/:id", authorizeRoles('manager'), facilitatorController.deleteFacilitator);
 
 module.exports = router;

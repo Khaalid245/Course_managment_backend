@@ -1,3 +1,4 @@
+// models/mode.model.js
 module.exports = (sequelize, DataTypes) => {
   const Mode = sequelize.define('Mode', {
     id: {

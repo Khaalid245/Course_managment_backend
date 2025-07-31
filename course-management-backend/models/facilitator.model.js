@@ -3,33 +3,36 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
     },
     email: {
       type: DataTypes.STRING,
+      allowNull: false,
       unique: true,
-      allowNull: false
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     qualification: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     location: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     managerId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: 'Managers', // Table name (must match DB)
-        key: 'id'
+        model: 'Users', // 👈 Make sure it matches the User table name
+        key: 'id',
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
-    }
+      onDelete: 'CASCADE',
+    },
+  }, {
+    tableName: 'Facilitators', // 👈 Force correct table name (case sensitive in MySQL)
+    timestamps: false,
   });
 
   return Facilitator;

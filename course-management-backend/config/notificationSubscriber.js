@@ -1,16 +1,25 @@
-const redis = require('../config/redis');
+const Redis = require("ioredis");
 
-const subscribeToNotifications = () => {
-  const sub = redis.duplicate();
+const subscriber = new Redis({
+  host: process.env.REDIS_HOST || "127.0.0.1",
+  port: process.env.REDIS_PORT || 6379,
+});
 
-  sub.subscribe("activity-updated", () => {
-    console.log("🔔 Subscribed to activity-updated channel");
+// ✅ Define the function
+function subscribeToNotifications() {
+  subscriber.subscribe("activity-updated", (err, count) => {
+    if (err) {
+      console.error("❌ Failed to subscribe:", err);
+    } else {
+      console.log(`📬 Subscribed to ${count} channel(s).`);
+    }
   });
 
-  sub.on("message", (channel, message) => {
-    const data = JSON.parse(message);
-    console.log(`📬 Notification received [${channel}]:`, data.message);
+  subscriber.on("message", (channel, message) => {
+    console.log(`📨 Message received on ${channel}:`, message);
+   
   });
-};
+}
+
 
 module.exports = subscribeToNotifications;

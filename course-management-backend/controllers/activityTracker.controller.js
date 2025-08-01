@@ -1,8 +1,6 @@
-// ✅ Let's update your ActivityTracker Controller to publish to Redis after update
-
 const db = require("../models");
 const ActivityTracker = db.ActivityTracker;
-const redis = require("../config/redis"); // 🔌 Redis import
+const publishNotification = require("../config/notificationPublisher"); 
 
 exports.createActivityTracker = async (req, res) => {
   try {
@@ -50,12 +48,13 @@ exports.updateActivityTracker = async (req, res) => {
 
     const updatedTracker = await ActivityTracker.findByPk(id);
 
-    // 📡 Publish notification to Redis
-    await redis.publish("activity-updated", JSON.stringify({
+    // ✅ Publish notification to Redis
+    await publishNotification({
+      type: "activity-update",
       activityTrackerId: id,
       message: `Activity Tracker ID ${id} was updated.`,
       timestamp: new Date().toISOString()
-    }));
+    });
 
     res.status(200).json(updatedTracker);
   } catch (error) {

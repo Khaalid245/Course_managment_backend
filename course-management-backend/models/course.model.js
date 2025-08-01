@@ -12,8 +12,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     half: {
       type: DataTypes.ENUM('H1', 'H2'),
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isIn: {
+          args: [['H1', 'H2']],
+          msg: 'Half must be either H1 or H2'
+        }
+      }
     }
   });
+
   return Course;
 };

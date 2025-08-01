@@ -1,5 +1,5 @@
 # 🎓 Course Management Platform – Backend Service
-
+# youtube video:  https://www.youtube.com/watch?v=mbaf7LqdQAw&ab_channel=Khaalidawyuusuf
 > ✅ **Summative Project - ALU Node.js Cohort (July 2025)**  
 > 🔐 Role-based REST API using Node.js, Express, Sequelize (MySQL), Redis, and Swagger for API docs  
 > 📚 Designed to support academic coordination, course allocation, activity tracking, and student engagement  

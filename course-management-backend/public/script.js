@@ -1,4 +1,4 @@
-// Translations object - now only includes translatable UI text
+
 const translations = {
     en: {
         title: "Course Reflection",
@@ -38,16 +38,15 @@ const translations = {
     }
 };
 
-// Store for student answers
 let studentAnswers = {
     question1: "",
     question2: "",
     question3: ""
 };
 
-// Function to change language
+
 function changeLanguage(language) {
-    // Get all elements that need translation
+   
     document.getElementById('title').textContent = translations[language].title;
     document.getElementById('welcome-message').textContent = translations[language].welcome;
     
@@ -55,7 +54,7 @@ function changeLanguage(language) {
     document.getElementById('question2-title').textContent = translations[language].question2;
     document.getElementById('question3-title').textContent = translations[language].question3;
     
-    // Update textarea placeholders
+
     const textareas = document.querySelectorAll('textarea');
     textareas.forEach(textarea => {
         textarea.placeholder = translations[language].textareaPlaceholder;
@@ -63,14 +62,14 @@ function changeLanguage(language) {
     
     document.getElementById('footer-text').textContent = translations[language].footer;
     
-    // Update the language attribute of the HTML element
+  
     document.documentElement.lang = language;
     
-    // Save the selected language to localStorage
+    
     localStorage.setItem('preferredLanguage', language);
 }
 
-// Save answers when textarea changes
+
 function setupAnswerHandlers() {
     document.getElementById('question1-answer').addEventListener('input', function() {
         studentAnswers.question1 = this.value;
@@ -88,15 +87,15 @@ function setupAnswerHandlers() {
     });
 }
 
-// Event listener for language selector
+
 document.getElementById('language-selector').addEventListener('change', function() {
     const selectedLanguage = this.value;
     changeLanguage(selectedLanguage);
 });
 
-// Initialize the page with the preferred language and saved answers
+
 function initializePage() {
-    // Load saved answers if they exist
+    
     const savedAnswers = localStorage.getItem('studentAnswers');
     if (savedAnswers) {
         studentAnswers = JSON.parse(savedAnswers);
@@ -105,13 +104,12 @@ function initializePage() {
         document.getElementById('question3-answer').value = studentAnswers.question3;
     }
     
-    // Check for saved language preference
+
     const savedLanguage = localStorage.getItem('preferredLanguage');
-    
-    // Check browser language
+   
     const browserLanguage = navigator.language.split('-')[0];
     
-    // Set the language (priority: saved preference > browser language > default English)
+
     let language = 'en';
     if (savedLanguage && translations[savedLanguage]) {
         language = savedLanguage;
@@ -119,15 +117,13 @@ function initializePage() {
         language = browserLanguage;
     }
     
-    // Update the dropdown to reflect the selected language
+
     document.getElementById('language-selector').value = language;
     
-    // Apply translations
+
     changeLanguage(language);
-    
-    // Set up answer handlers
+
     setupAnswerHandlers();
 }
 
-// Initialize the page when it loads
 window.addEventListener('DOMContentLoaded', initializePage);

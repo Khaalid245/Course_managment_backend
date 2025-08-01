@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Course Management Platform</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Reflection</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 id="greeting">Loading...</h1>
-  <select id="lang-select">
-    <option value="en">English</option>
-    <option value="ar">Arabic</option>
-    <option value="so">Somali</option>
-  </select>
+    <div class="container">
+        <header>
+            <h1 id="title">Course Reflection</h1>
+            <div class="language-switcher">
+                <select id="language-selector">
+                    <option value="en">English</option>
+                    <option value="fr">Français</option>
+                    <option value="es">Español</option>
+                    <option value="de">Deutsch</option>
+                </select>
+            </div>
+        </header>
 
-  <script>
-    const greetingEl = document.getElementById("greeting");
-    const langSelect = document.getElementById("lang-select");
+        <main>
+            <section class="welcome-section">
+                <p id="welcome-message">Welcome to my course reflection page!</p>
+            </section>
 
-    async function fetchGreeting(lang = 'en') {
-      const response = await fetch(`/api/greet?lang=${lang}`);
-      const text = await response.text();
-      greetingEl.innerText = text;
-    }
+            <section class="reflection-questions">
+                <div class="question">
+                    <h2 id="question1-title">What did you enjoy most about the course?</h2>
+                    <textarea id="question1-answer" rows="4" placeholder="Enter your answer here..."></textarea>
+                </div>
 
-    langSelect.addEventListener("change", (e) => {
-      fetchGreeting(e.target.value);
-    });
+                <div class="question">
+                    <h2 id="question2-title">What was the most challenging part?</h2>
+                    <textarea id="question2-answer" rows="4" placeholder="Enter your answer here..."></textarea>
+                </div>
 
-    fetchGreeting(); // default
-  </script>
+                <div class="question">
+                    <h2 id="question3-title">What could be improved?</h2>
+                    <textarea id="question3-answer" rows="4" placeholder="Enter your answer here..."></textarea>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p id="footer-text">© 2023 Course Reflection</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

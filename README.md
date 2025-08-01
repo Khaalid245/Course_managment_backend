@@ -43,3 +43,56 @@ This backend service powers a **Course Management Platform** used by academic in
 
 ## 📁 Folder Structure
 
+
+course-management-backend/
+├── app.js
+├── .env
+├── config/
+│ ├── db.js
+│ ├── redis.js
+│ ├── notificationPublisher.js
+├── controllers/
+│ ├── allocation.controller.js
+│ ├── activityTracker.controller.js
+├── middleware/
+│ └── authMiddleware.js
+├── models/
+│ ├── index.js
+│ ├── user.js
+│ ├── course.js
+│ ├── class.model.js
+│ ├── cohort.model.js
+│ ├── facilitator.model.js
+│ ├── allocation.model.js
+│ ├── activityTracker.model.js
+├── routes/
+│ ├── auth.routes.js
+│ ├── allocation.routes.js
+│ ├── activityTracker.routes.js
+├── swagger/
+│ └── swagger.js
+├── jobs/
+│ └── queueReminders.js
+├── test/
+│ └── course.test.js
+└── README.md
+
+
+
+---
+
+## 🔐 Authentication
+
+- JWT-based auth with role checks
+- Middleware: `authenticate`, `authorizeRoles('manager')`, etc.
+
+```bash
+POST /auth/login
+{
+  "email": "manager@example.com",
+  "password": "yourpassword"
+}
+
+Use the returned token in Swagger or Postman:
+
+Authorization: Bearer <your_token>

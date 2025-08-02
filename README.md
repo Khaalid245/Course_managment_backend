@@ -157,15 +157,15 @@ npm test
 `.env` file structure:
 
 ```ini
-PORT=3000
-DB_HOST=localhost
-DB_USER=root
-DB_PASS=password
+PORT=5000
 DB_NAME=course_db
-JWT_SECRET=myjwtsecret
-REDIS_PORT=6379
+DB_USER=root
+DB_PASSWORD=Khalidbro@44
+DB_HOST=localhost
+JWT_SECRET=supersecretjwtkey
 EMAIL_USER=megakhalid32@gmail.com
-EMAIL_PASS=password
+EMAIL_PASS=mulnrfhhmxpcupsp
+
 ```
 
 ---
@@ -177,11 +177,11 @@ EMAIL_PASS=password
 git clone https://github.com/yourusername/course-management-backend.git
 
 # 2. Install dependencies
-cd course-management-backend
+cd course-management-backen/course_management_backend
 npm install
 
 # 3. Configure environment variables
-cp .env.example .env
+cp .env
 # Fill in the details
 
 # 4. Start the server
